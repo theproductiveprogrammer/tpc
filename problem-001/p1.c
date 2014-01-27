@@ -51,5 +51,8 @@ int main (int argc, char** argv)
 
     printf ("There are %d ways to make change for %d\n",
             make_change (n, DENOMINATIONS, DC - 1), n);
+
+    /* done */
+     return 0;
 }
 

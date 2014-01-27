@@ -1,7 +1,6 @@
 
 /* this is the key array of valid denominations.
- * NB: this should be in ascending order and unique 
- * Note also that we have optimized away the 1 case */
+ * NB: this should be in ascending order and unique */
 int DENOMINATIONS[] = { 1, 2, 5, 10, 20, 50, 100 };
 int DC = sizeof (DENOMINATIONS)/sizeof (DENOMINATIONS[0]);  /* count */
 
@@ -71,5 +70,8 @@ int main (int argc, char** argv)
 
     printf ("There are %d ways to make change for %d\n",
             make_change (n, DENOMINATIONS, DC - 1), n);
+
+    /* done */
+    return 0;
 }
 
