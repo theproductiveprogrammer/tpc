@@ -38,15 +38,19 @@ It's guaranteed that the solution will always exist. If there're multiple soluti
 ### Example
 
 #### Input:
+````
 4
 123
 abdou
 mcMosa
 kimo3
+````
 
 #### Output:
+````
 8242465576917890.0 494
 6966198460426549.0 487
 4484456159639948.0 483
 21357815651012032.0 488
+````
 
