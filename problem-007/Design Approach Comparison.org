@@ -1,0 +1,65 @@
+#+TITLE: Shape Design Experiment (OOPS vs Non-OOPS)
+* Our visualization of the solution
+  [[Shapes-VISA.png]]
+* OOPS
+  [[OOPS-Shape-Design.jpg]]
+* Non-OOPS
+** Basic functions
+   =Draw (what);=
+** Data Structures
+   The basic data structure consists of a set of vertices and edges between
+   them. The edges can be straight lines, elliptical arcs, or splines.
+
+   Another options we considered was having two 'types' of data structures:
+   one for lines and the other for elliptical arcs. We finally settled on
+   having a single unified structure as it gives much greater flexibility and
+   we also discovered [[http://en.wikipedia.org/wiki/B%C3%A9zier_spline][splines]].
+
+   The data structure thus contains vertices, edges between vertices, and the
+   types of these edges. Depending upon the type, futher data is required
+   (in the form of control points) to control the shape of the spline or the
+   arc of the ellipse.
+
+   If the number of edges is less than the number of vertices, the shape is open
+   and should not be filled.
+
+   #+BEGIN_EXAMPLE
+   Vertices: V1|V2|V3|V4|...
+   Edges: E1 | E2 | E3 [ | E4 ]
+   EdgeType: = Line | Arc | Spline
+   Control Points: =  0   | 3 pts | 2 pts
+   #+END_EXAMPLE
+** Example
+   #+BEGIN_EXAMPLE
+   Rectangle = (1,0) | (1,1) | (0,1) | (0,0)
+               L | L | L | L
+               OnMove (Vx, Vx-new)
+                  -> find Vx
+                  -> move prev x to match
+                  -> move next y to match
+               OnAdd (V-new) -> NULL (not allowed to add)
+    #+END_EXAMPLE
+** Flow
+   The 'Draw' algorithm will therefore take an input data structure and be
+   able to simply draw edges between them.
+** Other functions
+   * =Redraw= (only edges that fall within region)
+   * =DoesShapeContain (Point)= (generic function)
+   * =Fill (color, byshape | byedges)=
+* Differences
+  1. OOPs was simpler to start designing
+  2. OOPs quickly reached discussions on the 'structure' of the heirarchy
+  3. OOPs has good tools and support for modeling the design
+  4. We discussed the names of things a lot in order to be satisfied with OOPs design.
+  5. Constructing the 'circle' class first has a problem with 'ellipse'. Same with Square and 'rectangle'
+  6. Non-OOPs was harder to get completed design
+  7. Non-OOPs quickly reached discussions on algorithms (elliptical curves
+     and Splines)
+  8. Non-OOPs solution seems simpler to add functionality
+     - line patterns, multi-colored borders, fills based on shape vs edges, etc
+  9. Non-OOP solution started as similar to OOP
+     Rectangle::Draw became DrawRectangle
+     Circle::Draw became DrawCircle
+  10. The shape of the Non-OOP solution quickly diverged from the OOP solution
+  11. The OOP solution seems to have a lot more 'management' code for managing
+      the objects and heirarchy itself.
