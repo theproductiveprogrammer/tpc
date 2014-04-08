@@ -3,18 +3,18 @@
 #define NUMROWS 1234
 #define NUMCOLS 5678
 
-short ROWS[NUMROWS+1];
-short COLS[NUMCOLS+1];
-short LROWS[NUMROWS+1];
-short LCOLS[NUMCOLS+1];
+int ROWS[NUMROWS+1];
+int COLS[NUMCOLS+1];
+int LROWS[NUMROWS+1];
+int LCOLS[NUMCOLS+1];
 
-#define V(a,i) (a[(i)]?a[(i)]:i)
-#define SWAP(a,i1,i2) { int t=V(a,i1); a[i1] = V(a,i2); a[i2] = t; L##a[a[i1]]=i1;L##a[a[i2]]=i2;}
+#define V(a,i) (a[(i)]?a[(i)]:(a[(i)]=i))
+#define SWAP(a,i1,i2) t=V(a,i1); a[i1]=V(a,i2); a[i2]=t; L##a[a[i1]]=i1;L##a[a[i2]]=i2;
 
 int main ()
 {
         char cmd;
-        int x,y,v;
+        int x,y,v,t;
 
     while (scanf("%c", &cmd)>0) {
         switch (cmd) {
@@ -32,9 +32,8 @@ int main ()
                 break;
             case 'W': /*find val*/
                 scanf("%d", &v); v--;
-                printf ("%d %d\n", V(LROWS, (v / NUMCOLS) + 1),
-                                   V(LCOLS, (v % NUMCOLS) + 1)
-                       );
+                printf ("%d ", V(LROWS, (v / NUMCOLS) + 1));
+                printf ("%d\n", V(LCOLS, (v % NUMCOLS) + 1));
                 break;
         }
     }
