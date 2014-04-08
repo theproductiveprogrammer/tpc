@@ -14,13 +14,28 @@ int LCOLS[NUMCOLS+1];
 #define gc getchar_unlocked
 int read_int() {
         char c = gc();
-    while(c<'0' || c>'9') c = gc();
+    while(c<'0') c = gc();
         int ret = 0;
-    while(c>='0' && c<='9') {
-        ret = 10 * ret + c - 48;
+    while(c>='0') {
+        ret = 10 * ret + c - '0';
         c = gc();
     }
     return ret;
+}
+
+#define pc putchar_unlocked
+void put_int (int i)
+{
+        char op[100];
+        int n = 0;
+        int t;
+
+    while (i) {
+        op[n++] = (i % 10) + '0';
+        i = i / 10;
+    }
+
+    while (n--) pc (op[n]);
 }
 
 int main ()
@@ -40,12 +55,15 @@ int main ()
                 break;
             case 'Q': /*show val*/
                 x = read_int(); y = read_int ();
-                printf ("%d\n",(V(ROWS,x)-1)*NUMCOLS+V(COLS,y));
+                put_int ((V(ROWS,x)-1)*NUMCOLS+V(COLS,y));
+                pc ('\n');
                 break;
             case 'W': /*find val*/
                 v = read_int(); v--;
-                printf ("%d ", V(LROWS, (v / NUMCOLS) + 1));
-                printf ("%d\n", V(LCOLS, (v % NUMCOLS) + 1));
+                put_int (V(LROWS, (v / NUMCOLS) + 1));
+                pc (' ');
+                put_int (V(LCOLS, (v % NUMCOLS) + 1));
+                pc ('\n');
                 break;
         }
     }
