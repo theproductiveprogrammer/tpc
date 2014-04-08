@@ -31,22 +31,18 @@ int main ()
     while ((cmd = gc()) != EOF){
         switch (cmd) {
             case 'R': /*swap row*/
-                //scanf("%d %d", &x, &y);
                 x = read_int(); y = read_int ();
                 SWAP(ROWS,x,y);
                 break;
             case 'C': /*swap col*/
-                //scanf("%d %d", &x, &y);
                 x = read_int(); y = read_int ();
                 SWAP(COLS,x,y);
                 break;
             case 'Q': /*show val*/
-                //scanf("%d %d", &x, &y);
                 x = read_int(); y = read_int ();
                 printf ("%d\n",(V(ROWS,x)-1)*NUMCOLS+V(COLS,y));
                 break;
             case 'W': /*find val*/
-                //scanf("%d", &v); v--;
                 v = read_int(); v--;
                 printf ("%d ", V(LROWS, (v / NUMCOLS) + 1));
                 printf ("%d\n", V(LCOLS, (v % NUMCOLS) + 1));
