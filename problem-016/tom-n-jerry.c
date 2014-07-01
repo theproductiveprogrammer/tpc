@@ -31,18 +31,6 @@
  */
 #include <stdio.h>
 
-#define gc getchar_unlocked
-int read_int() {
-        char c = gc();
-    while(c<'0') c = gc();
-        int ret = 0;
-    while(c>='0') {
-        ret = 10 * ret + c - '0';
-        c = gc();
-    }
-    return ret;
-}
-
 #define ABSDIFF(a,b) (a < b ? b - a : a - b)
 
 int main () {
@@ -52,16 +40,11 @@ int main () {
         int mx, my, c1x, c1y, c2x, c2y;
         int m, c;
 
-    maxx = read_int ();
-    maxy = read_int ();
-    num  = read_int ();
+    scanf ("%d %d\n", &maxx, &maxy);
+    scanf ("%d\n", &num);
     while (num--) {
-        mx = read_int ();
-        my = read_int ();
-        c1x = read_int ();
-        c1y = read_int ();
-        c2x = read_int ();
-        c2y = read_int ();
+        scanf ("%d %d %d %d %d %d\n",
+                &mx, &my, &c1x, &c1y, &c2x, &c2y);
 
         c = ABSDIFF(c1x,mx) + c1y;
         if (my < c) {
